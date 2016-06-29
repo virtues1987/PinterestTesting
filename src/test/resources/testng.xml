@@ -6,4 +6,9 @@
         <class name="functions.pages.SignInTest"/>
     </classes>
 </test>
+    <test name="Create new Board">
+        <classes>
+            <class name="functions.pages.CreateNewBoard"/>
+        </classes>
+    </test>
 </suite>

@@ -40,8 +40,9 @@ public class SecondVerificationForm {
     }
 
     @Step("Click on Submit button")
-    public void clickSubmit() {
+    public MainPage clickSubmit() {
         submit.click();
+        return new MainPage(this.driver);
     }
 
 

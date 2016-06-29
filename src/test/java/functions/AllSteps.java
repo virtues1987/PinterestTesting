@@ -2,8 +2,7 @@ package functions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import pages.SecondVerificationForm;
-import pages.SignInForm;
+import pages.*;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public class AllSteps {
@@ -13,8 +12,8 @@ public class AllSteps {
         this.driver = driver;
     }
 
-    @Step("Fill forms: User name \"{0}\" , Password \"{1}\", image - \"{2}\"")
-    public void signingInPinterest(String email, String password, String imageName) {
+    @Step("Fill forms: User name \"{0}\" , Password \"{1}\".")
+    public void signingInPinterest(String email, String password) {
         SignInForm signInForm = PageFactory.initElements(driver, SignInForm.class);
         signInForm.fillUserEmail(email);
         signInForm.fillPassword(password);
@@ -23,7 +22,20 @@ public class AllSteps {
         secondVerificationForm.fillUserEmail(email);
         secondVerificationForm.fillPassword(password);
         secondVerificationForm.clickSubmit();
+    }
 
+    @Step("Create new Board")
+    public void createNewBoard(String boardName, String boardDescription, int categoryNumber){
+        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
+        mainPage.clickOnUserButton();
+        UserInfoPage userInfo = PageFactory.initElements(driver, UserInfoPage.class);
+        userInfo.createNewNoard();
+        CreateNewBoardPage createNewBoard = PageFactory.initElements(driver, CreateNewBoardPage.class);
+        createNewBoard.setBoardName(boardName);
+        createNewBoard.setBoardDescription(boardDescription);
+        createNewBoard.choseEducationCategory(categoryNumber);
+        createNewBoard.chosePrivateStatus();
+        createNewBoard.saveBoard();
     }
 
 }

@@ -15,8 +15,8 @@ public class SignInTest extends TestBase {
     @Parameters({"userName", "passWord", "expectedMessage"})
     @Test
     public void signIn() {
-        new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15", "SignIn.png");
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.App.AppBase.Module.content_only.unauth form")));
+        new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
+        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input.Module.field")));
     }
 }
 
