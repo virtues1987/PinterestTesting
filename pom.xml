@@ -13,7 +13,7 @@
         <resources.plugin.version>2.7</resources.plugin.version>
         <!--Maven properties-->
         <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
-        <java.compliler.version>1.7</java.compliler.version>
+        <java.compliler.version>1.8</java.compliler.version>
         <surefire.report>2.19.1</surefire.report>
         <!--Apache properties-->
         <apache.commons.version>1.3.2</apache.commons.version>
@@ -104,8 +104,14 @@
         <dependency>
             <groupId>org.sikuli</groupId>
             <artifactId>sikuli-api</artifactId>
-            <version>1.0.2</version>
+            <version>1.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.sikuli</groupId>
+            <artifactId>sikuli-core</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -143,14 +149,8 @@
                         <forkCount>0</forkCount>
                         <reuseForks>true</reuseForks>
                         <suiteXmlFiles>
-                            <suiteXmlFile>src\test\resources\loginPageTesting.xml</suiteXmlFile>
+                            <suiteXmlFile>src\test\resources\testng.xml</suiteXmlFile>
                         </suiteXmlFiles>
-                        <properties>
-                            <property>
-                                <name>listener</name>
-                                <value>listeners.OnFailure</value>
-                            </property>
-                        </properties>
                         <systemPropertyVariables>
                             <reporter.debug>false</reporter.debug>
                         </systemPropertyVariables>

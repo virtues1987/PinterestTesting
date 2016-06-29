@@ -5,22 +5,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.allure.annotations.Step;
 
-public class SignInForm {
+/*******************************************************************************
+ * (C) Copyright
+ * Logivations GmbH, Munich 2010-2016
+ ******************************************************************************/
 
-
+public class SecondVerificationForm {
     WebDriver driver;
 
-    public SignInForm(WebDriver driver) {
+    public SecondVerificationForm(WebDriver driver) {
         this.driver = driver;
     }
 
-    @FindBy(css = "#userPassword")
+    @FindBy(css = "li.loginPassword > input")
     public WebElement userPassword;
 
-    @FindBy(css = "#userEmail")
+    @FindBy(css = "li.loginUsername > input")
     public WebElement userEmail;
 
-    @FindBy(css = "div.inspiredSearchDialog > button")
+    @FindBy(css = "div.mainContainer div.formFooter span")
     public WebElement submit;
 
 
@@ -37,8 +40,9 @@ public class SignInForm {
     }
 
     @Step("Click on Submit button")
-    public SecondVerificationForm clickSubmit() {
+    public void clickSubmit() {
         submit.click();
-        return new SecondVerificationForm(this.driver);
     }
+
+
 }

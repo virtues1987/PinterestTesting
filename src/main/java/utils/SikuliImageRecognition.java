@@ -1,5 +1,6 @@
 package utils;
 
+
 import org.sikuli.api.DesktopScreenRegion;
 import org.sikuli.api.ImageTarget;
 import org.sikuli.api.ScreenRegion;
@@ -9,21 +10,18 @@ import org.sikuli.api.robot.desktop.DesktopMouse;
 
 import java.io.File;
 
-/**
- * Created by 3aecb on 23.Jun.16.
- */
 public class SikuliImageRecognition {
-    private ScreenRegion screenRegion;
+    private ScreenRegion sRegion;
 
     public SikuliImageRecognition() {
-        screenRegion = new DesktopScreenRegion();
+        sRegion = new DesktopScreenRegion();
     }
 
-    public void clickOnSignInButton(String imageName) {
-        File buttonPathFile = new File("src/test/resources/sikuliImages/" + imageName);
+    public void clickOnImage(String imageName) {
+        File buttonPathFile = new File("src\\test\\resources\\images\\" + imageName);
         Target imageTarget = new ImageTarget(buttonPathFile);
-        ScreenRegion region = screenRegion.wait(imageTarget, 7000);
+        ScreenRegion r = sRegion.wait(imageTarget, 7000);
         Mouse mouse = new DesktopMouse();
-        mouse.click(region.getCenter());
+        mouse.click(r.getCenter());
     }
 }
