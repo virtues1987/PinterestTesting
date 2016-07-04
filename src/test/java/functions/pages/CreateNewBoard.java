@@ -19,8 +19,10 @@ public class CreateNewBoard extends TestBase{
     @Parameters({"boardName", "boardDescription", "categoryNumber"})
     @Test
     public void createBoard(){
-        new AllSteps(driver).createNewBoard("Some name", "Some description", 22);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.App.AppBase.Module.content_only.unauth form")));
+        new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
+        new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input.Module.field")));
+        new AllSteps(driver).createNewBoard("Some name", "Some description", "Освіта");
+        new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.App.AppBase.Module.content_only.unauth form")));
     }
 }
 

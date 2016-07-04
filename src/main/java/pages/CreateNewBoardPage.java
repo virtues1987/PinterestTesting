@@ -1,10 +1,11 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
@@ -16,13 +17,13 @@ import java.util.List;
 
 public class CreateNewBoardPage {
 
+
     @FindBy(css = "#boardEditName")
     public WebElement boardEditName;
     @FindBy(css = "#boardEditDescription")
     public WebElement boardEditDescription;
     @FindBy(css = ".CategoriesSelect")
     public WebElement categoriesSelect;
-    JavascriptExecutor executor;
     WebDriver driver;
     @FindBys({
             @FindBy(css = "li.categoryWrapper option:nth-child(1)"),
@@ -61,8 +62,10 @@ public class CreateNewBoardPage {
             @FindBy(css = "li.categoryWrapper option:nth-child(34)")
     })
     private List<WebElement> categories;
+
     @FindBy(css = ".Checkbox.Module.fancyToggle.styledToggle")
     private WebElement setBoardPrivate;
+
     @FindBy(css = ".saveBoardButton")
     private WebElement saveBoardButton;
 
@@ -82,9 +85,10 @@ public class CreateNewBoardPage {
     }
 
     @Step("Chose Education category")
-    public void choseEducationCategory(int categoryNumber) {
+    public void choseEducationCategory(String categoryText) {
         categoriesSelect.click();
-        categories.get(categoryNumber);
+        Select dropdown = new Select(driver.findElement(By.name("category")));
+        dropdown.selectByVisibleText(categoryText);
     }
 
     @Step("Set board private")
