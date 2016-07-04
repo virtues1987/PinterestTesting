@@ -2,6 +2,7 @@ package functions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
@@ -19,10 +20,10 @@ public class TestBase {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-/*    @AfterSuite(alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
-    }*/
+    }
 }

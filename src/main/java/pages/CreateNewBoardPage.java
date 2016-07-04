@@ -4,11 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
-
-import java.util.List;
 
 /*******************************************************************************
  * (C) Copyright
@@ -16,16 +13,15 @@ import java.util.List;
  ******************************************************************************/
 
 public class CreateNewBoardPage {
-
+    WebDriver driver;
 
     @FindBy(css = "#boardEditName")
     public WebElement boardEditName;
     @FindBy(css = "#boardEditDescription")
     public WebElement boardEditDescription;
-    @FindBy(css = ".CategoriesSelect")
+    @FindBy(css = "[name='category']")
     public WebElement categoriesSelect;
-    WebDriver driver;
-    @FindBys({
+/*    @FindBys({
             @FindBy(css = "li.categoryWrapper option:nth-child(1)"),
             @FindBy(css = "li.categoryWrapper option:nth-child(2)"),
             @FindBy(css = "li.categoryWrapper option:nth-child(3)"),
@@ -61,15 +57,16 @@ public class CreateNewBoardPage {
             @FindBy(css = "li.categoryWrapper option:nth-child(33)"),
             @FindBy(css = "li.categoryWrapper option:nth-child(34)")
     })
-    private List<WebElement> categories;
+    private List<WebElement> categories;*/
 
     @FindBy(css = ".Checkbox.Module.fancyToggle.styledToggle")
     private WebElement setBoardPrivate;
 
-    @FindBy(css = ".saveBoardButton")
+    @FindBy(css = "[type='submit'")
     private WebElement saveBoardButton;
 
     public CreateNewBoardPage(WebDriver driver) {
+        this.driver = driver;
     }
 
     @Step("Set Name")
@@ -85,10 +82,10 @@ public class CreateNewBoardPage {
     }
 
     @Step("Chose Education category")
-    public void choseEducationCategory(String categoryText) {
+    public void choseEducationCategory(String catValue) {
         categoriesSelect.click();
-        Select dropdown = new Select(driver.findElement(By.name("category")));
-        dropdown.selectByVisibleText(categoryText);
+        Select dropdown = new Select(driver.findElement(By.cssSelector(".CategoriesSelect")));
+        dropdown.selectByValue(catValue);
     }
 
     @Step("Set board private")

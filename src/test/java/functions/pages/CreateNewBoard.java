@@ -16,13 +16,13 @@ import ru.yandex.qatools.allure.annotations.Title;
 
 public class CreateNewBoard extends TestBase{
     @Title("Test creates New Board")
-    @Parameters({"boardName", "boardDescription", "categoryNumber"})
+    @Parameters({"boardName", "boardDescription", "catValue"})
     @Test
     public void createBoard(){
         new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
         new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input.Module.field")));
-        new AllSteps(driver).createNewBoard("Some name", "Some description", "Освіта");
-        new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.App.AppBase.Module.content_only.unauth form")));
+        new AllSteps(driver).createNewBoard("Some name", "Some description", "education");
+        new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
     }
 }
 
