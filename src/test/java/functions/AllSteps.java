@@ -25,7 +25,7 @@ public class AllSteps {
     }
 
     @Step("Create new Board")
-    public void createNewBoard(String boardName, String boardDescription, String catValue){
+    public void createNewBoard(String boardName, String boardDescription, String text){
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
         mainPage.clickOnUserButton();
         UserInfoPage userInfo = PageFactory.initElements(driver, UserInfoPage.class);
@@ -33,9 +33,8 @@ public class AllSteps {
         CreateNewBoardPage createNewBoard = PageFactory.initElements(driver, CreateNewBoardPage.class);
         createNewBoard.setBoardName(boardName);
         createNewBoard.setBoardDescription(boardDescription);
-        createNewBoard.choseEducationCategory(catValue);
+        createNewBoard.choseEducationCategory(text);
         createNewBoard.chosePrivateStatus();
         createNewBoard.saveBoard();
     }
-
 }

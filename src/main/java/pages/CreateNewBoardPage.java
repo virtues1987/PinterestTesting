@@ -13,56 +13,17 @@ import ru.yandex.qatools.allure.annotations.Step;
  ******************************************************************************/
 
 public class CreateNewBoardPage {
-    WebDriver driver;
-
     @FindBy(css = "#boardEditName")
     public WebElement boardEditName;
     @FindBy(css = "#boardEditDescription")
     public WebElement boardEditDescription;
     @FindBy(css = "[name='category']")
     public WebElement categoriesSelect;
-/*    @FindBys({
-            @FindBy(css = "li.categoryWrapper option:nth-child(1)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(2)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(3)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(4)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(5)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(6)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(7)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(8)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(9)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(10)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(11)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(12)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(13)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(14)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(15)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(16)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(17)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(18)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(19)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(20)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(21)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(22)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(23)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(24)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(25)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(26)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(27)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(28)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(29)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(30)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(31)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(32)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(33)"),
-            @FindBy(css = "li.categoryWrapper option:nth-child(34)")
-    })
-    private List<WebElement> categories;*/
-
-    @FindBy(css = ".Checkbox.Module.fancyToggle.styledToggle")
+    WebDriver driver;
+    @FindBy(css = ".slider")
     private WebElement setBoardPrivate;
 
-    @FindBy(css = "[type='submit'")
+    @FindBy(css = ".saveBoardButton")
     private WebElement saveBoardButton;
 
     public CreateNewBoardPage(WebDriver driver) {
@@ -82,17 +43,16 @@ public class CreateNewBoardPage {
     }
 
     @Step("Chose Education category")
-    public void choseEducationCategory(String catValue) {
+    public void choseEducationCategory(String value) {
         categoriesSelect.click();
-        Select dropdown = new Select(driver.findElement(By.cssSelector(".CategoriesSelect")));
-        dropdown.selectByValue(catValue);
+        Select dropdown = new Select(driver.findElement(By.cssSelector("[name='category']")));
+        dropdown.selectByValue(value);
+        dropdown.getFirstSelectedOption().click();
     }
 
     @Step("Set board private")
     public void chosePrivateStatus() {
-        if (!setBoardPrivate.isEnabled()) {
-            setBoardPrivate.click();
-        }
+        setBoardPrivate.click();
     }
 
     @Step("Save board")
