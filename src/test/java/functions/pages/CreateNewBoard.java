@@ -24,7 +24,7 @@ public class CreateNewBoard extends TestBase{
         new AllSteps(driver).createNewBoard("Some name", "Some description", "education");
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
         new AllSteps(driver).checkNewBoard("Some name", "Some description", "Education");
-
+        new AllSteps(driver).removeBoard();
     }
 }
 

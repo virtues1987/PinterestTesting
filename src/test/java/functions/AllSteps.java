@@ -16,48 +16,66 @@ public class AllSteps {
 
     @Step("Fill forms: User name \"{0}\" , Password \"{1}\".")
     public void signingInPinterest(String email, String password) {
-        SignInForm signInForm = PageFactory.initElements(driver, SignInForm.class);
-        signInForm.fillUserEmail(email);
-        signInForm.fillPassword(password);
-        signInForm.clickSubmit();
-        SecondVerificationForm secondVerificationForm = PageFactory.initElements(driver,SecondVerificationForm.class);
-        secondVerificationForm.fillUserEmail(email);
-        secondVerificationForm.fillPassword(password);
-        secondVerificationForm.clickSubmit();
+        try{
+            SignInForm signInForm = PageFactory.initElements(driver, SignInForm.class);
+            signInForm.fillUserEmail(email);
+            signInForm.fillPassword(password);
+            signInForm.clickSubmit();
+            SecondVerificationForm secondVerificationForm = PageFactory.initElements(driver, SecondVerificationForm.class);
+            secondVerificationForm.fillUserEmail(email);
+            secondVerificationForm.fillPassword(password);
+            secondVerificationForm.clickSubmit();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Step("Create new Board")
-    public void createNewBoard(String boardName, String boardDescription, String value){
-        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        mainPage.clickOnUserButton();
-        UserInfoPage userInfo = PageFactory.initElements(driver, UserInfoPage.class);
-        userInfo.createNewNoard();
-        CreateNewBoardPage createNewBoard = PageFactory.initElements(driver, CreateNewBoardPage.class);
-        createNewBoard.setBoardName(boardName);
-        createNewBoard.setBoardDescription(boardDescription);
-        createNewBoard.choseEducationCategory(value);
-        createNewBoard.chosePrivateStatus();
-        createNewBoard.saveBoard();
+    public void createNewBoard(String boardName, String boardDescription, String value) {
+        try {
+            MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
+            mainPage.clickOnUserButton();
+            UserInfoPage userInfo = PageFactory.initElements(driver, UserInfoPage.class);
+            userInfo.createNewNoard();
+            CreateNewBoardPage createNewBoard = PageFactory.initElements(driver, CreateNewBoardPage.class);
+            createNewBoard.setBoardName(boardName);
+            createNewBoard.setBoardDescription(boardDescription);
+            createNewBoard.choseEducationCategory(value);
+            createNewBoard.chosePrivateStatus();
+            createNewBoard.saveBoard();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Step("Checking new board")
     public void checkNewBoard(String expectedBoardName, String expectedBoardDescription, String expectedBoardCategory) {
-        CreatedBoardPage createdBoardPage = PageFactory.initElements(driver, CreatedBoardPage.class);
-        createdBoardPage.clickOnEditBoard();
+        try {
+            CreatedBoardPage createdBoardPage = PageFactory.initElements(driver, CreatedBoardPage.class);
+            createdBoardPage.clickOnEditBoard();
+            CreateNewBoardPage createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
+            String actualBoardName = createNewBoardPage.boardEditName.getAttribute("value");
+            Assert.assertEquals(actualBoardName, expectedBoardName);
+            String actualBoardDescription = createNewBoardPage.boardEditDescription.getText();
+            Assert.assertEquals(actualBoardDescription, expectedBoardDescription);
+            String actualBoardCategory = createNewBoardPage.categoriesSelect.findElement(By.cssSelector("[selected='selected']")).getText();
+            Assert.assertEquals(actualBoardCategory, expectedBoardCategory);
+            Boolean actualStatus = createNewBoardPage.chosePrivateStatus();
+            Assert.assertTrue(actualStatus);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeBoard() {
         CreateNewBoardPage createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
-        String actualBoardName = createNewBoardPage.boardEditName.getAttribute("value");
-        Assert.assertEquals(actualBoardName, expectedBoardName);
-        String actualBoardDescription = createNewBoardPage.boardEditDescription.getText();
-        Assert.assertEquals(actualBoardDescription, expectedBoardDescription);
-        String actualBoardCategory = createNewBoardPage.categoriesSelect.findElement(By.cssSelector("[selected='selected']")).getText();
-        Assert.assertEquals(actualBoardCategory, expectedBoardCategory);
-        Boolean actualStatus = createNewBoardPage.chosePrivateStatus();
-        Assert.assertTrue(actualStatus);
         createNewBoardPage.deleteBoard();
     }
 
     @Step("Search for immages and pinn to board")
-    public void searchAndPinImagesToBoard(String category){
+    public void searchAndPinImagesToBoard(String category) {
 
     }
 }

@@ -2,7 +2,7 @@ package functions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import java.util.concurrent.TimeUnit;
@@ -11,12 +11,12 @@ public class TestBase {
     protected WebDriver driver;
 
     @Parameters({"path"})
-    @BeforeTest
+    @BeforeSuite
     public void openBrowser(String path) {
         driver = new FirefoxDriver();
-        driver.get(path);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(path);
     }
 
 /*    @AfterSuite(alwaysRun = true)
