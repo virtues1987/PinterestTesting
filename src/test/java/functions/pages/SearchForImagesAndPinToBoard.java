@@ -5,7 +5,6 @@ import functions.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Title;
 
@@ -14,18 +13,13 @@ import ru.yandex.qatools.allure.annotations.Title;
  * Logivations GmbH, Munich 2010-2016
  ******************************************************************************/
 
-public class CreateNewBoard extends TestBase{
+public class SearchForImagesAndPinToBoard extends TestBase{
     @Title("Test creates New Board")
-    @Parameters({"boardName", "boardDescription", "catValue"})
     @Test
-    public void createBoard(){
+    public void searchAndPinImagesToBoard(){
         new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input")));
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input.Module.field")));
         new AllSteps(driver).createNewBoard("Some name", "Some description", "education");
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
-        new AllSteps(driver).checkNewBoard("Some name", "Some description", "Education");
-
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
     }
 }
-
-

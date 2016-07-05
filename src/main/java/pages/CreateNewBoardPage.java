@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
 
 /*******************************************************************************
@@ -51,13 +53,32 @@ public class CreateNewBoardPage {
     }
 
     @Step("Set board private")
-    public void chosePrivateStatus() {
-        setBoardPrivate.click();
+    public Boolean chosePrivateStatus() {
+        if (setBoardPrivate.isDisplayed()) {
+            setBoardPrivate.click();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Step("Save board")
-    public void saveBoard() {
+    public CreatedBoardPage saveBoard() {
         saveBoardButton.click();
+        return new CreatedBoardPage(this.driver);
+    }
+
+    @Step("Remove board")
+    public UserInfoPage deleteBoard() {
+        WebElement deleteBoardButton = driver.findElement(By.cssSelector(".deleteBoardButton"));
+        if (deleteBoardButton.isDisplayed()){
+            deleteBoardButton.click();
+            new WebDriverWait(driver,3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".standardForm")));
+            WebElement confirmDeletion = driver.findElement(By.cssSelector(".confirm"));
+            confirmDeletion.click();
+            return new UserInfoPage(this.driver);
+        }
+        return null;
     }
 }
 
