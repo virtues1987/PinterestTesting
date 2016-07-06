@@ -14,7 +14,7 @@ import java.util.List;
  ******************************************************************************/
 
 public class MainPage extends Page{
-    @FindBy(css = ".usernameLink")
+    @FindBy(css = ".profileName")
     public WebElement userButton;
     @FindBy(css = ".ShowModalButton")
     public List<WebElement> saveButtons;
@@ -31,15 +31,17 @@ public class MainPage extends Page{
     }
 
     @Step("Save button")
-    public void clickOnSaveToBoard(int index) {
+    public boolean clickOnSaveToBoard(int index) {
         saveButtons.get(index).click();
         pinitLocalization.get(index).click();
+        WebElement toastMessage = driver.findElement(By.cssSelector(".Toasts"));
+        return toastMessage.isDisplayed();
     }
-
+/*
     @Step("Check toast message")
     public boolean toastIsDisplayed(){
         WebElement toastMessage = driver.findElement(By.cssSelector(".Toasts"));
         return toastMessage.isDisplayed();
-    }
+    }*/
 }
 

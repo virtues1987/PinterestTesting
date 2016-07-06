@@ -48,7 +48,7 @@ public class AllSteps {
     public void checkNewBoard(String expectedBoardName, String expectedBoardDescription, String expectedBoardCategory) {
         try {
             CreatedBoardPage createdBoardPage = PageFactory.initElements(driver, CreatedBoardPage.class);
-            createdBoardPage.clickOnEditBoard();
+            createdBoardPage.clickEditBoard();
             CreateNewBoardPage createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
             String actualBoardName = createNewBoardPage.boardEditName.getAttribute("value");
             Assert.assertEquals(actualBoardName, expectedBoardName);
@@ -62,20 +62,5 @@ public class AllSteps {
             e.printStackTrace();
         }
 
-    }
-
-/*    public void removeBoard() {
-        CreateNewBoardPage createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
-        createNewBoardPage.deleteBoard();
-    }*/
-
-    @Step("Search for immages and pinn to board")
-    public void searchAndPinImagesToBoard(int index) {
-        UserInfoPage userInfoPage = PageFactory.initElements(driver, UserInfoPage.class);
-        userInfoPage.backToMainPage();
-        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        mainPage.clickOnSaveToBoard(index);
-        Boolean toastIsDisplayed = mainPage.toastIsDisplayed();
-        Assert.assertTrue(toastIsDisplayed);
     }
 }

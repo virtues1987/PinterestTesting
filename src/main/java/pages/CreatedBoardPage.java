@@ -21,8 +21,8 @@ public class CreatedBoardPage extends Page{
         super(driver);
     }
 
-    public CreateNewBoardPage clickOnEditBoard() {
+
+    public void clickEditBoard() {
         boardEditButton.click();
-        return new CreateNewBoardPage(this.driver);
     }
 }

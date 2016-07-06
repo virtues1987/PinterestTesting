@@ -1,57 +1,32 @@
 package functions.pages;
 
-import functions.AllSteps;
-import functions.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.yandex.qatools.allure.annotations.Title;
+import pages.MainPage;
+import pages.UserInfoPage;
 
 /*******************************************************************************
  * (C) Copyright
  * Logivations GmbH, Munich 2010-2016
  ******************************************************************************/
 
-public class SearchForImagesAndPinToBoard extends TestBase{
+public class SearchForImagesAndPinToBoard extends CreateNewBoard{
+    UserInfoPage userInfoPage;
+    MainPage mainPage;
 
-
-    @Title("Test creates New Board")
     @Test
-    public void searchAndPinImagesToBoard(){
-        new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input.Module.field")));
-        new AllSteps(driver).createNewBoard("Some name", "Some description", "education");
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
+    public void MainMenuPageInit(){
+        userInfoPage = PageFactory.initElements(driver, UserInfoPage.class);
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
+
+    @Test
+    public void addingPins(int index){
+        userInfoPage.backToMainPage();
+        mainPage.clickOnSaveToBoard(index);
+        Assert.assertTrue(mainPage.clickOnSaveToBoard(index));
+    }
+
 }
 
-/*
-    SignInForm signInForm;
-    SecondVerificationForm secondVerificationForm;
-
-    @BeforeTest
-    @Parameters({"path"})
-    public void signIn(String path) {
-        driver.get(path);
-        signInForm = PageFactory.initElements(driver, SignInForm.class);
-        secondVerificationForm = PageFactory.initElements(driver, SecondVerificationForm.class);
-    }
-
-    @Test
-    @Parameters({"login", "password"})
-    public void firstForm(String login, String password) {
-        signInForm.fillFirstSignInForm(login, password);
-    }
-
-    @Test
-    @Parameters({"login", "password"})
-    public void secondForm(String login, String password) {
-        secondVerificationForm.fillSecondSignInForm(login, password);
-    }
-
-    public void signing(String path, String login, String password) {
-        signIn(path);
-        firstForm(login, password);
-        secondForm(login, password);
-    }*/
