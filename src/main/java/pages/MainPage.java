@@ -26,9 +26,8 @@ public class MainPage extends Page{
     }
 
     @Step("Click on UserNameLink")
-    public UserInfoPage clickOnUserButton() {
+    public void clickOnUserButton() {
         userButton.click();
-        return new UserInfoPage(this.driver);
     }
 
     @Step("Save button")
@@ -40,11 +39,7 @@ public class MainPage extends Page{
     @Step("Check toast message")
     public boolean toastIsDisplayed(){
         WebElement toastMessage = driver.findElement(By.cssSelector(".Toasts"));
-        if (!toastMessage.isDisplayed()){
-            return true;
-        } else {
-            return false;
-        }
+        return toastMessage.isDisplayed();
     }
 }
 

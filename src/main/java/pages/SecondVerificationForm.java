@@ -39,14 +39,14 @@ public class SecondVerificationForm extends Page{
     }
 
     @Step("Click on Submit button")
-    public MainPage clickSubmit() {
+    public void clickSubmit() {
         submit.click();
-        return new MainPage(this.driver);
     }
 
-    public void fillSecondSignInForm(String email, String password) {
+    public MainPage fillSecondSignInForm(String email, String password) {
         fillUserEmail(email);
         fillPassword(password);
         clickSubmit();
+        return new MainPage(this.driver);
     }
 }

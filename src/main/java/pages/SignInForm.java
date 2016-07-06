@@ -37,15 +37,15 @@ public class SignInForm {
     }
 
     @Step("Click on Submit button")
-    public SecondVerificationForm clickSubmit() {
+    public void clickSubmit() {
         submit.click();
-        return new SecondVerificationForm(this.driver);
     }
 
     @Step("Fill first sign-in form")
-    public void fillFirstSignInForm(String email, String password){
+    public SecondVerificationForm fillFirstSignInForm(String email, String password){
         fillUserEmail(email);
         fillPassword(password);
         clickSubmit();
+        return new SecondVerificationForm(this.driver);
     }
 }

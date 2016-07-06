@@ -8,6 +8,11 @@ import org.testng.annotations.Test;
 import pages.SecondVerificationForm;
 import pages.SignInForm;
 
+/*******************************************************************************
+ * (C) Copyright
+ * Logivations GmbH, Munich 2010-2016
+ ******************************************************************************/
+
 public class SignInTest extends TestBase {
 
     SignInForm signInForm;
@@ -15,7 +20,7 @@ public class SignInTest extends TestBase {
 
     @BeforeTest
     @Parameters({"path"})
-    public void signIn(String path) {
+    public void init(String path) {
         driver.get(path);
         signInForm = PageFactory.initElements(driver, SignInForm.class);
         secondVerificationForm = PageFactory.initElements(driver, SecondVerificationForm.class);

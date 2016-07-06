@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Sign In">
+<suite name="Pinterest">
     <parameter name="path" value="https://www.pinterest.com"/>
-    <test name="Create new Board">
+    <test name="Sign In">
         <parameter name="login" value="horuk.at15@gmail.com"/>
         <parameter name="password" value="horuk.at15horuk.at15"/>
+        <parameter name="boardName" value="Some Name"/>
+        <parameter name="boardDescription" value="Some Description"/>
         <classes>
-            <class name="functions.pages.SignInTest"/>
             <class name="functions.pages.CreateNewBoard"/>
         </classes>
     </test>
