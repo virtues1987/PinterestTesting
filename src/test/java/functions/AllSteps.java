@@ -16,7 +16,6 @@ public class AllSteps {
 
     @Step("Fill forms: User name \"{0}\" , Password \"{1}\".")
     public void signingInPinterest(String email, String password) {
-        try{
             SignInForm signInForm = PageFactory.initElements(driver, SignInForm.class);
             signInForm.fillUserEmail(email);
             signInForm.fillPassword(password);
@@ -25,10 +24,6 @@ public class AllSteps {
             secondVerificationForm.fillUserEmail(email);
             secondVerificationForm.fillPassword(password);
             secondVerificationForm.clickSubmit();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 
     @Step("Create new Board")
@@ -37,7 +32,7 @@ public class AllSteps {
             MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
             mainPage.clickOnUserButton();
             UserInfoPage userInfo = PageFactory.initElements(driver, UserInfoPage.class);
-            userInfo.createNewNoard();
+            userInfo.createNewBoard();
             CreateNewBoardPage createNewBoard = PageFactory.initElements(driver, CreateNewBoardPage.class);
             createNewBoard.setBoardName(boardName);
             createNewBoard.setBoardDescription(boardDescription);
@@ -69,13 +64,18 @@ public class AllSteps {
 
     }
 
-    public void removeBoard() {
+/*    public void removeBoard() {
         CreateNewBoardPage createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
         createNewBoardPage.deleteBoard();
-    }
+    }*/
 
     @Step("Search for immages and pinn to board")
-    public void searchAndPinImagesToBoard(String category) {
-
+    public void searchAndPinImagesToBoard(int index) {
+        UserInfoPage userInfoPage = PageFactory.initElements(driver, UserInfoPage.class);
+        userInfoPage.backToMainPage();
+        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
+        mainPage.clickOnSaveToBoard(index);
+        Boolean toastIsDisplayed = mainPage.toastIsDisplayed();
+        Assert.assertTrue(toastIsDisplayed);
     }
 }

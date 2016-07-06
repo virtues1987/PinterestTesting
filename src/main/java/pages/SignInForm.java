@@ -41,4 +41,11 @@ public class SignInForm {
         submit.click();
         return new SecondVerificationForm(this.driver);
     }
+
+    @Step("Fill first sign-in form")
+    public void fillFirstSignInForm(String email, String password){
+        fillUserEmail(email);
+        fillPassword(password);
+        clickSubmit();
+    }
 }

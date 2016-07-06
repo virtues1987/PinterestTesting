@@ -9,18 +9,17 @@ import org.openqa.selenium.support.FindBy;
  * Logivations GmbH, Munich 2010-2016
  ******************************************************************************/
 
-public class CreatedBoardPage {
-    WebDriver driver;
-
-    public CreatedBoardPage(WebDriver driver) {
-        this.driver = driver;
-    }
+public class CreatedBoardPage extends Page{
 
     @FindBy(css = ".boardName")
     public WebElement boardName;
 
     @FindBy(css = ".boardEditButton")
     public WebElement boardEditButton;
+
+    public CreatedBoardPage(WebDriver driver) {
+        super(driver);
+    }
 
     public CreateNewBoardPage clickOnEditBoard() {
         boardEditButton.click();

@@ -10,12 +10,7 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Logivations GmbH, Munich 2010-2016
  ******************************************************************************/
 
-public class SecondVerificationForm {
-    WebDriver driver;
-
-    public SecondVerificationForm(WebDriver driver) {
-        this.driver = driver;
-    }
+public class SecondVerificationForm extends Page{
 
     @FindBy(css = "li.loginPassword > input")
     public WebElement userPassword;
@@ -25,6 +20,10 @@ public class SecondVerificationForm {
 
     @FindBy(css = "div.mainContainer div.formFooter span")
     public WebElement submit;
+
+    public SecondVerificationForm(WebDriver driver) {
+        super(driver);
+    }
 
 
     @Step("Clear and fill user email")
@@ -45,5 +44,9 @@ public class SecondVerificationForm {
         return new MainPage(this.driver);
     }
 
-
+    public void fillSecondSignInForm(String email, String password) {
+        fillUserEmail(email);
+        fillPassword(password);
+        clickSubmit();
+    }
 }

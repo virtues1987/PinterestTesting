@@ -8,6 +8,7 @@ import org.testng.annotations.Parameters;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
+
     protected WebDriver driver;
 
     @Parameters({"path"})
@@ -16,13 +17,12 @@ public class TestBase {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(path);
     }
 
 /*    @AfterSuite(alwaysRun = true)
     public void tearDown() {
         if (driver != null) {
-            driver.quit();
+            driver.close();
         }
     }*/
 }

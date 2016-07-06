@@ -1,31 +1,39 @@
 package functions.pages;
 
-import functions.AllSteps;
 import functions.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Parameters;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.yandex.qatools.allure.annotations.Title;
+import pages.CreateNewBoardPage;
+import pages.CreatedBoardPage;
+import pages.MainPage;
+import pages.UserInfoPage;
 
 /*******************************************************************************
  * (C) Copyright
  * Logivations GmbH, Munich 2010-2016
  ******************************************************************************/
 
-public class CreateNewBoard extends TestBase{
-    @Title("Test creates New Board")
-    @Parameters({"boardName", "boardDescription", "catValue"})
+public class CreateNewBoard extends TestBase {
+    MainPage mainPage;
+    UserInfoPage userInfoPage;
+    CreateNewBoardPage createNewBoardPage;
+    CreatedBoardPage createdBoardPage;
+
     @Test
-    public void createBoard(){
-        new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input")));
-        new AllSteps(driver).createNewBoard("Some name", "Some description", "education");
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
-        new AllSteps(driver).checkNewBoard("Some name", "Some description", "Education");
-        new AllSteps(driver).removeBoard();
+    public void signIn() {
+        mainPage = PageFactory.initElements(driver, MainPage.class);
+        userInfoPage = PageFactory.initElements(driver, UserInfoPage.class);
+        createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
+    }
+
+    @Test
+    public void createNewBoard(String boardName, String boardDescription) {
+        mainPage.clickOnUserButton();
+        userInfoPage.createNewBoard();
+        createNewBoardPage.createNewBoard(boardName, boardDescription);
+        createdBoardPage.clickOnEditBoard();
+        Assert.assertEquals(createNewBoardPage.getBorderName(), boardName);
+        Assert.assertEquals(createNewBoardPage.getBorderDescription(), boardDescription);
     }
 }
-
-

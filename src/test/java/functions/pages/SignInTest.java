@@ -1,23 +1,35 @@
 package functions.pages;
 
-import functions.AllSteps;
 import functions.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import ru.yandex.qatools.allure.annotations.Title;
+import pages.SecondVerificationForm;
+import pages.SignInForm;
 
 public class SignInTest extends TestBase {
 
-    @Title("Test tries to login to Pinterest")
-    @Parameters({"userName", "passWord", "expectedMessage"})
+    SignInForm signInForm;
+    SecondVerificationForm secondVerificationForm;
+
+    @BeforeTest
+    @Parameters({"path"})
+    public void signIn(String path) {
+        driver.get(path);
+        signInForm = PageFactory.initElements(driver, SignInForm.class);
+        secondVerificationForm = PageFactory.initElements(driver, SecondVerificationForm.class);
+    }
+
     @Test
-    public void signIn() {
-        new AllSteps(driver).signingInPinterest("horuk.at15@gmail.com", "horuk.at15horuk.at15");
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".Input.Module.field")));
+    @Parameters({"login", "password"})
+    public void firstForm(String login, String password) {
+        signInForm.fillFirstSignInForm(login, password);
+    }
+
+    @Test
+    @Parameters({"login", "password"})
+    public void secondForm(String login, String password) {
+        secondVerificationForm.fillSecondSignInForm(login, password);
     }
 }
-
-

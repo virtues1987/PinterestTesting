@@ -14,6 +14,8 @@ import ru.yandex.qatools.allure.annotations.Title;
  ******************************************************************************/
 
 public class SearchForImagesAndPinToBoard extends TestBase{
+
+
     @Title("Test creates New Board")
     @Test
     public void searchAndPinImagesToBoard(){
@@ -23,3 +25,33 @@ public class SearchForImagesAndPinToBoard extends TestBase{
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".boardName")));
     }
 }
+
+/*
+    SignInForm signInForm;
+    SecondVerificationForm secondVerificationForm;
+
+    @BeforeTest
+    @Parameters({"path"})
+    public void signIn(String path) {
+        driver.get(path);
+        signInForm = PageFactory.initElements(driver, SignInForm.class);
+        secondVerificationForm = PageFactory.initElements(driver, SecondVerificationForm.class);
+    }
+
+    @Test
+    @Parameters({"login", "password"})
+    public void firstForm(String login, String password) {
+        signInForm.fillFirstSignInForm(login, password);
+    }
+
+    @Test
+    @Parameters({"login", "password"})
+    public void secondForm(String login, String password) {
+        secondVerificationForm.fillSecondSignInForm(login, password);
+    }
+
+    public void signing(String path, String login, String password) {
+        signIn(path);
+        firstForm(login, password);
+        secondForm(login, password);
+    }*/

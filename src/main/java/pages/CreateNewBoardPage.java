@@ -14,14 +14,13 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Logivations GmbH, Munich 2010-2016
  ******************************************************************************/
 
-public class CreateNewBoardPage {
+public class CreateNewBoardPage extends Page{
     @FindBy(css = "#boardEditName")
     public WebElement boardEditName;
     @FindBy(css = "#boardEditDescription")
     public WebElement boardEditDescription;
     @FindBy(css = "[name='category']")
     public WebElement categoriesSelect;
-    WebDriver driver;
     @FindBy(css = ".slider")
     private WebElement setBoardPrivate;
 
@@ -29,8 +28,9 @@ public class CreateNewBoardPage {
     private WebElement saveBoardButton;
 
     public CreateNewBoardPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
+
 
     @Step("Set Name")
     public void setBoardName(String boardName) {
@@ -80,5 +80,22 @@ public class CreateNewBoardPage {
         }
         return null;
     }
-}
 
+    @Step("Create New Board")
+    public void createNewBoard(String boardName, String boardDescription){
+        setBoardName(boardName);
+        setBoardDescription(boardDescription);
+        chosePrivateStatus();
+        saveBoard();
+    }
+
+    @Step("Get border Name")
+    public String getBorderName(){
+        return boardEditName.getText();
+    }
+
+    @Step("Get border Description")
+    public String getBorderDescription() {
+        return boardEditDescription.getText();
+    }
+}
