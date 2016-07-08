@@ -34,4 +34,20 @@ public class UserInfoPage extends Page{
         navigateButton.click();
         return new MainPage(this.driver);
     }
+
+/*    @Step("Check existing board")
+    public void checkExistingBoard(){
+        try {
+            WebElement alreadyCreatedBoard = driver.findElement(By.cssSelector("*[href='/horukat15/some-name/']"));
+            if(alreadyCreatedBoard.isDisplayed()){
+                driver.findElement(By.cssSelector(".boardEditButton")).click();
+                CreateNewBoardPage createNewBoardPage = PageFactory.initElements(driver, CreateNewBoardPage.class);
+                createNewBoardPage.deleteBoard();
+            }
+        } catch (NoSuchElementException e){
+            e.printStackTrace();
+            throw new RuntimeException("board list is empty");
+        }
+    }*/
+
 }

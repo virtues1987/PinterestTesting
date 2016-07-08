@@ -27,6 +27,5 @@ public class SearchForImagesAndPinToBoard extends CreateNewBoard{
         mainPage.clickOnSaveToBoard(index);
         Assert.assertTrue(mainPage.clickOnSaveToBoard(index));
     }
-
 }
 

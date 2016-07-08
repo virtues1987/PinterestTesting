@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,6 +27,9 @@ public class CreateNewBoardPage extends Page{
 
     @FindBy(css = ".saveBoardButton")
     private WebElement saveBoardButton;
+
+    @FindBy(css = ".cancelButton")
+    private WebElement cancelButton;
 
     public CreateNewBoardPage(WebDriver driver) {
         super(driver);
@@ -65,7 +69,7 @@ public class CreateNewBoardPage extends Page{
     @Step("Save board")
     public CreatedBoardPage saveBoard() {
         saveBoardButton.click();
-        return new CreatedBoardPage(this.driver);
+        return PageFactory.initElements(driver, CreatedBoardPage.class);
     }
 
     @Step("Remove board")
@@ -76,26 +80,33 @@ public class CreateNewBoardPage extends Page{
             new WebDriverWait(driver,3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".standardForm")));
             WebElement confirmDeletion = driver.findElement(By.cssSelector(".confirm"));
             confirmDeletion.click();
-            return new UserInfoPage(this.driver);
+            return PageFactory.initElements(driver, UserInfoPage.class);
         }
         return null;
     }
 
     @Step("Create New Board")
-    public void createNewBoard(String boardName, String boardDescription){
+    public CreatedBoardPage createNewBoard(String boardName, String boardDescription){
         setBoardName(boardName);
         setBoardDescription(boardDescription);
         chosePrivateStatus();
         saveBoard();
+        return PageFactory.initElements(driver, CreatedBoardPage.class);
     }
 
     @Step("Get border Name")
     public String getBorderName(){
-        return boardEditName.getText();
+        return boardEditName.getAttribute("value");
     }
 
     @Step("Get border Description")
     public String getBorderDescription() {
-        return boardEditDescription.getText();
+        return boardEditDescription.getAttribute("value");
+    }
+
+    @Step("Cancel creating / editing")
+    private CreatedBoardPage cancelCreateEdit(){
+        cancelButton.click();
+        return PageFactory.initElements(driver, CreatedBoardPage.class);
     }
 }
