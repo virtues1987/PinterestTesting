@@ -105,7 +105,7 @@ public class CreateNewBoardPage extends Page{
     }
 
     @Step("Cancel creating / editing")
-    private CreatedBoardPage cancelCreateEdit(){
+    public CreatedBoardPage cancelCreateEdit(){
         cancelButton.click();
         return PageFactory.initElements(driver, CreatedBoardPage.class);
     }

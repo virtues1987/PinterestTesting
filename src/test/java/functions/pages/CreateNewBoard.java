@@ -42,6 +42,6 @@ public class CreateNewBoard extends SignInTest {
         createdBoardPage.clickEditBoard();
         Assert.assertEquals(createNewBoardPage.getBorderName(), boardName);
         Assert.assertEquals(createNewBoardPage.getBorderDescription(), boardDescription);
-        createdBoardPage.backToMainPage();
+//        createdBoardPage.backToMainPage();
     }
 }

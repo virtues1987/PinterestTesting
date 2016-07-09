@@ -3,8 +3,8 @@ package functions.pages;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.CreatedBoardPage;
 import pages.MainPage;
-import pages.UserInfoPage;
 
 /*******************************************************************************
  * (C) Copyright
@@ -12,18 +12,18 @@ import pages.UserInfoPage;
  ******************************************************************************/
 
 public class SearchForImagesAndPinToBoard extends CreateNewBoard{
-    UserInfoPage userInfoPage;
+    CreatedBoardPage createdBoardPage;
     MainPage mainPage;
 
     @Test
     public void MainMenuPageInit(){
-        userInfoPage = PageFactory.initElements(driver, UserInfoPage.class);
+        createdBoardPage = PageFactory.initElements(driver, CreatedBoardPage.class);
         mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
     @Test
     public void addingPins(int index){
-        userInfoPage.backToMainPage();
+        createdBoardPage.backToMainPage();
         mainPage.clickOnSaveToBoard(index);
         Assert.assertTrue(mainPage.clickOnSaveToBoard(index));
     }
