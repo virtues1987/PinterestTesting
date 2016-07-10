@@ -17,6 +17,12 @@ public class UserInfoPage extends Page{
 
     @FindBy(css = ".NavigateButton")
     public WebElement navigateButton;
+    
+    @FindBy(xpath = ".//title")
+    public WebElement title;
+    
+    @FindBy(xpath = ".//*[contains(@class, 'Button Module ShowModalButton btn editProfile hasText primary rounded')]")
+    public WebElement editButton;
 
     public UserInfoPage(WebDriver driver) {
         super(driver);
@@ -34,7 +40,18 @@ public class UserInfoPage extends Page{
         navigateButton.click();
         return new MainPage(this.driver);
     }
-
+    
+	public boolean isEditButtonDisplayed() {
+		try {
+			return editButton.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+    	
+    
+  
+    
 /*    @Step("Check existing board")
     public void checkExistingBoard(){
         try {
