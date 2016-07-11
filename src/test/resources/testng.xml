@@ -10,4 +10,10 @@
             <class name="functions.pages.CreateNewBoard"/>
         </classes>
     </test>
+    <test name="UserInfoPage">
+    	<classes>
+    		<class name="functioins.pages.UserInfoPage"/>
+    	</classes>
+    </test>
+    
 </suite>
