@@ -1,8 +1,12 @@
 package pages;
 
+import java.util.NoSuchElementException;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import ru.yandex.qatools.allure.annotations.Step;
 
 /*******************************************************************************
@@ -17,6 +21,12 @@ public class UserInfoPage extends Page{
 
     @FindBy(css = ".NavigateButton")
     public WebElement navigateButton;
+    
+    @FindBy(xpath = ".//title")
+    public WebElement title;
+    
+    @FindBy(xpath = ".//*[@class='Button Module ShowModalButton btn editProfile hasText primary rounded']")
+    public WebElement editButton;
 
     public UserInfoPage(WebDriver driver) {
         super(driver);
@@ -34,6 +44,18 @@ public class UserInfoPage extends Page{
         navigateButton.click();
         return new MainPage(this.driver);
     }
+    
+    
+    public boolean isEditButtonDisplayed(){
+    	try{
+    		editButton.isDisplayed();
+    	} catch (NoSuchElementException e){
+    		return false;
+    	}
+    	return true;
+    }
+    
+    
 
 /*    @Step("Check existing board")
     public void checkExistingBoard(){
